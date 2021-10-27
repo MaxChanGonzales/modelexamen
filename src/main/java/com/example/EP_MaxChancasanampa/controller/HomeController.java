@@ -22,7 +22,7 @@ public class HomeController {
     }
         @RequestMapping("/main")
     public String main(Model model) {
-        model.addAttribute("mensaje", "Bienvenido");
+        model.addAttribute("main", "Bienvenido");
         return "main";
     }
 }

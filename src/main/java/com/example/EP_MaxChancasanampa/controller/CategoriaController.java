@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CategoriaController {
     @Autowired
     private CategoriaRepository categoriaRepository;
-
     @RequestMapping("/categorias")
     public String categoria(Model model){
         model.addAttribute("categorias", categoriaRepository.findAll());
@@ -32,7 +31,7 @@ public class CategoriaController {
     public String create(Model model) {
         return "addCat";
     }
-    @RequestMapping("/add")
+    @RequestMapping("/addCat")
     public String guardar(@RequestParam String Categoria, @RequestParam String Accion, Model model) {
         Categoria categoria = new Categoria();
         categoria.setCategoria(Categoria);
@@ -41,19 +40,19 @@ public class CategoriaController {
         categoriaRepository.save(categoria);
         return "redirect:/categoria";
     }
-    @RequestMapping("/del/{id}")
+    @RequestMapping("/delCat/{id}")
     public String delete(@PathVariable(value="id") Long id) {
         System.out.println("ID: "+id);
         Categoria categoria = categoriaRepository.findById(id).orElse(null);
         categoriaRepository.delete(categoria);
         return "redirect:/categoria";
     }
-    @RequestMapping("/edit/{id}")
+    @RequestMapping("/editCat/{id}")
     public String edit(@PathVariable(value="id") Long id, Model model) {
         model.addAttribute("categoria", categoriaRepository.findById(id).orElse(null));
         return "editCat";
     }
-    @RequestMapping("/update")
+    @RequestMapping("/updateCat")
     public String update(@RequestParam Long id, @RequestParam String Categoria, @RequestParam String Accion) {
         Categoria categoria = categoriaRepository.findById(id).orElse(null);
         categoria.setCategoria(Categoria);

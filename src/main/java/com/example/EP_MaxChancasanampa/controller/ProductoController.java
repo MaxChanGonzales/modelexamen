@@ -33,7 +33,7 @@ public class ProductoController {
     public String create(Model model) {
         return "addProd";
     }
-    @RequestMapping("/add")
+    @RequestMapping("/addProd")
     public String guardar(@RequestParam String Producto ,@RequestParam int Precio, @RequestParam String Stock, @RequestParam String Accion, Model model) {
         Producto producto = new Producto();
         producto.setProducto(Producto);
@@ -44,19 +44,19 @@ public class ProductoController {
         productoRepository.save(producto);
         return "redirect:/producto";
     }
-    @RequestMapping("/del/{id}")
+    @RequestMapping("/delProd/{id}")
     public String delete(@PathVariable(value="id") Long id) {
         System.out.println("ID: "+id);
         Producto producto = productoRepository.findById(id).orElse(null);
         productoRepository.delete(producto);
         return "redirect:/producto";
     }
-    @RequestMapping("/edit/{id}")
+    @RequestMapping("/editProd/{id}")
     public String edit(@PathVariable(value="id") Long id, Model model) {
         model.addAttribute("producto", productoRepository.findById(id).orElse(null));
         return "editProd";
     }
-    @RequestMapping("/update")
+    @RequestMapping("/updateProd")
     public String update(@RequestParam Long id, @RequestParam String Producto ,@RequestParam int Precio, @RequestParam String Stock, @RequestParam String Accion) {
         Producto producto = productoRepository.findById(id).orElse(null);
         producto.setProducto(Producto);
